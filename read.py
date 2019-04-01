@@ -8,7 +8,7 @@ with open('reviews.txt','r') as f:
 			print (len(data))
 print('檔案讀取完了，總共有', len(data), '筆資料')
 
-#每一筆留言的平均長度怎麼計算?
+# 每一筆留言的平均長度怎麼計算?
 
 sum_len = 0
 for d in data:
@@ -16,7 +16,7 @@ for d in data:
 
 print('留言的平均長度是', sum_len / len(data))
 
-#篩選100個字以下
+# 篩選100個字以下
 
 new = []  # 建立一個new的清單
 for d in data:	#data一百萬筆的留言中 把清單中一個一個拿出來，d是每一個留言
@@ -26,7 +26,7 @@ print('一共有', len(new), '筆留言長度小於100')
 print(new[0])
 print(new[1])
 
-#篩選good的留言清單(字串)
+# 篩選good的留言清單(字串)
 
 good = []
 for d in data:
@@ -36,7 +36,7 @@ print('一共有', len(good), '筆留言有提到good這個字串')
 print(good[0])
 print(good[1])
 
-#篩選快寫法(等同上方的篩選good的快寫方式31~34)
+# 篩選快寫法(等同上方的篩選good的快寫方式31~34)
 
 good = [d for d in data if 'good' in d]
 
@@ -45,3 +45,35 @@ bad = ['bad' in d for d in data] #等同下方三行程式
 bad = []
 for d in data:
 	bad.append('bad' in d)
+
+print(data[0])
+
+# 文字計數
+
+wc = {} # word_count
+for d in data:
+	words = d.split()
+	for word in words:
+		if word in wc:
+			wc[word] += 1
+		else:
+			wc[word] = 1	#新增新的Key進wc字典
+for word in wc:
+	if wc[word] > 1000000:
+		print(word, wc[word])
+
+print(len(wc))
+print(wc['Aaron'])
+
+while True:
+	word = input('請問你想要查甚麼字: ')
+	if word == 'q':
+		break
+	if word in wc:
+		print(word, '出現過的次數為: ', wc[word])
+	else:
+		print('這個字沒有出現過喔!')
+print('感謝使用此留言查詢程式')
+
+
+
